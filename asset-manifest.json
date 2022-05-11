@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/league2022-logo/static/css/main.c3dab985.css",
-    "main.js": "/league2022-logo/static/js/main.2fc63c92.js",
+    "main.css": "/league2022-logo/static/css/main.a325ae91.css",
+    "main.js": "/league2022-logo/static/js/main.2cd83240.js",
     "static/js/27.7e3719c9.chunk.js": "/league2022-logo/static/js/27.7e3719c9.chunk.js",
+    "static/media/SourceHanSerifJP-Bold.woff": "/league2022-logo/static/media/SourceHanSerifJP-Bold.3b6e7fbbd6fb1839e023.woff",
     "index.html": "/league2022-logo/index.html"
   },
   "entrypoints": [
-    "static/css/main.c3dab985.css",
-    "static/js/main.2fc63c92.js"
+    "static/css/main.a325ae91.css",
+    "static/js/main.2cd83240.js"
   ]
 }
