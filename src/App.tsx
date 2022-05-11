@@ -1,5 +1,3 @@
-import SakuraFlurry from "./sakura";
-
 function App() {
   const CircleIcon: React.FC<{ thumbnail_url: string; width: number }> = ({
     thumbnail_url,
@@ -162,6 +160,7 @@ function App() {
               <div
                 className="team"
                 style={{
+                  zIndex:10000,
                   width: 74,
                   height: 400,
                   marginRight: 5,
@@ -197,8 +196,20 @@ function App() {
         style={{
           animation: `string-fade 3s ease-out ${teams.length * 0.5}s forwards`,
           opacity: 0,
+          position: 'relative'
         }}
       >
+        <img
+          width={1440}
+          height={400}
+          src={'/league2022-logo/sakurafubuki-bg-768x576.jpg'}
+          style={{
+            objectFit: 'cover',
+            position: 'absolute',
+            top:0,
+            opacity: 0.4
+          }}
+        />
         <div
           style={{
             height: 140,
@@ -206,7 +217,8 @@ function App() {
             fontSize: 70,
             paddingTop: 60,
             textAlign: "center",
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            position: 'absolute'
           }}
         >
           仲間とつかめ、<span style={{
@@ -220,6 +232,8 @@ function App() {
             fontSize: 44,
             textAlign: "center",
             width: teams.length*74,
+            position: 'absolute',
+            top:230
           }}
         >
           関東キャップリーグ 2022 春季
@@ -230,11 +244,12 @@ function App() {
             fontSize: 34,
             textAlign: "center",
             width: teams.length*79,
+            position: 'absolute',
+            top: 350
           }}
         >
           5/21[土]～8/20[土]
         </div>
-        <SakuraFlurry/>
       </div>
     </div>
   );
