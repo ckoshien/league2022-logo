@@ -42,7 +42,7 @@ function App() {
       id: 162,
     },
     {
-      name: "神戸高専",
+      name: "六神",
       backgroundColor: "#6666cc",
       id: 162,
     },
