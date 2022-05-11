@@ -22,94 +22,64 @@ function App() {
   };
   const teams = [
     {
-      name: "早大紺碧",
-      backgroundColor: "#9B003F",
+      name: "賀茂別雷",
+      backgroundColor: "#039",
       id: 162,
     },
     {
-      name: "早大臙脂",
-      backgroundColor: "#9B003F",
+      name: "関西学院大学",
+      backgroundColor: "#10069f",
       id: 162,
     },
     {
-      name: "世田谷",
-      backgroundColor: "#1D6D3F",
-      id: 65,
+      name: "立命館大学",
+      backgroundColor: "#990000",
+      id: 162,
     },
     {
-      name: "短冊",
-      backgroundColor: "#DC143C",
-      id: 58,
+      name: "近畿大学",
+      backgroundColor: "#014f7d",
+      id: 162,
     },
     {
-      name: "アルパコラ",
-      backgroundColor: "#DC143C",
-      id: 58,
+      name: "神戸高専",
+      backgroundColor: "#6666cc",
+      id: 162,
     },
     {
-      name: "横国みなと",
-      backgroundColor: "#1955A6",
-      id: 57,
+      name: "学園都市",
+      backgroundColor: "#18cba8",
+      id: 162,
     },
     {
-      name: "横国みらい",
-      backgroundColor: "#1955A6",
-      id: 57,
+      name: "淀川",
+      backgroundColor: "#03a9f4",
+      id: 162,
     },
     {
-      name: "横国ときわ",
-      backgroundColor: "#1955A6",
-      id: 57,
+      name: "大阪大",
+      backgroundColor: "#2c287f",
+      id: 162,
     },
     {
-      name: "東京大",
-      backgroundColor: "#ADD8E6",
-      id: 155,
+      name: "龍谷大",
+      backgroundColor: "#ed0000",
+      id: 162,
     },
     {
-      name: "目白",
-      backgroundColor: "#79CAFF",
-      id: 73,
+      name: "湯山台",
+      backgroundColor: "#991d1d",
+      id: 162,
     },
     {
-      name: "生田農工大",
-      backgroundColor: "#483698",
-      id: 61,
-    },
-    {
-      name: "三田",
-      backgroundColor: "#001E62",
-      id: 106,
-    },
-    {
-      name: "青山学院大",
-      backgroundColor: "#277559",
-      id: 239,
-    },
-    {
-      name: "城東",
-      backgroundColor: "#00007B",
-      id: 232,
-    },
-    {
-      name: "Eintracht",
-      backgroundColor: "#ED591A",
-      id: 202,
-    },
-    {
-      name: "千葉大",
-      backgroundColor: "#C6002F",
-      id: 111,
-    },
-    {
-      name: "専修大",
+      name: "大阪蓋暁",
       backgroundColor: "#000000",
-      id: 251,
+      id: 162,
     },
     {
-      name: "上智大",
-      backgroundColor: "#800000",
-      id: 94,
+      name: "吉田",
+      backgroundColor: "#00205b",
+      id: 162,
     },
   ];
   return (
@@ -138,7 +108,7 @@ function App() {
                   color: black;
                 }
                 100% {
-                  color: #FF66C4;
+                  color: gold;
                 }
               }
               `}
@@ -170,18 +140,13 @@ function App() {
                   animation: `move${idx} 1s ease-out ${idx * 0.5}s forwards`,
                 }}
               >
-                <CircleIcon
-                  thumbnail_url={`https://cap-baseball.com/images/${team.id}.jpg`}
-                  width={64}
-                />
                 <div
                   style={{
                     color: "white",
                     fontSize: 46,
                     width: 74,
-                    marginTop: 20,
                     writingMode: "vertical-lr",
-                    padding: "0 5px",
+                    padding: '10px 5px',
                     fontWeight: 'bold'
                   }}
                 >
@@ -215,16 +180,27 @@ function App() {
             height: 140,
             width: teams.length*79,
             fontSize: 70,
-            paddingTop: 60,
-            textAlign: "center",
+            paddingTop: 15,
+            textAlign: "left",
             fontWeight: 'bold',
             position: 'absolute'
           }}
         >
-          仲間とつかめ、<span style={{
-            animation: `spring 2s ease-out ${teams.length * 0.5 + 3}s forwards`,
-            color: 'black'
-          }}>春</span>の栄冠。
+          今始まる、新たな歴史。
+        </div>
+        <div
+          style={{
+            height: 140,
+            width: teams.length*79,
+            fontSize: 70,
+            paddingTop: 110,
+            textAlign: "right",
+            fontWeight: 'bold',
+            position: 'absolute'
+          }}
+        >
+        「初代<span style={{ animation: `spring 2s ease-out ${teams.length * 0.5 + 3}s forwards`,
+            color: 'black' }}>王</span>者」は誰の手に。
         </div>
         <div
           style={{
@@ -236,7 +212,7 @@ function App() {
             top:230
           }}
         >
-          関東キャップリーグ 2022 春季
+          関西キャップリーグ 2022 春季
         </div>
         <div
           style={{
@@ -248,7 +224,7 @@ function App() {
             top: 350
           }}
         >
-          5/21[土]～8/20[土]
+          4/16[土]～7/31[土]
         </div>
       </div>
     </div>
