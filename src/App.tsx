@@ -27,9 +27,19 @@ function App() {
       id: 162,
     },
     {
-      name: "早大臙脂",
-      backgroundColor: "#9B003F",
-      id: 162,
+      name: "横国ときわ",
+      backgroundColor: "#1955A6",
+      id: 57,
+    },
+    {
+      name: "城東",
+      backgroundColor: "#00007B",
+      id: 232,
+    },
+    {
+      name: "短冊",
+      backgroundColor: "#DC143C",
+      id: 58,
     },
     {
       name: "世田谷",
@@ -37,9 +47,25 @@ function App() {
       id: 65,
     },
     {
-      name: "短冊",
-      backgroundColor: "#DC143C",
-      id: 58,
+      name: "東京大",
+      backgroundColor: "#ADD8E6",
+      id: 155,
+    },
+    {
+      name: "目白",
+      backgroundColor: "#79CAFF",
+      id: 73,
+    },
+    {
+      name: "青山学院大",
+      backgroundColor: "#277559",
+      id: 239,
+    },
+    
+    {
+      name: "早大臙脂",
+      backgroundColor: "#9B003F",
+      id: 162,
     },
     {
       name: "アルパコラ",
@@ -57,21 +83,6 @@ function App() {
       id: 57,
     },
     {
-      name: "横国ときわ",
-      backgroundColor: "#1955A6",
-      id: 57,
-    },
-    {
-      name: "東京大",
-      backgroundColor: "#ADD8E6",
-      id: 155,
-    },
-    {
-      name: "目白",
-      backgroundColor: "#79CAFF",
-      id: 73,
-    },
-    {
       name: "生田農工大",
       backgroundColor: "#483698",
       id: 61,
@@ -82,19 +93,14 @@ function App() {
       id: 106,
     },
     {
-      name: "青山学院大",
-      backgroundColor: "#277559",
-      id: 239,
-    },
-    {
-      name: "城東",
-      backgroundColor: "#00007B",
-      id: 232,
-    },
-    {
       name: "Eintracht",
       backgroundColor: "#ED591A",
       id: 202,
+    },
+    {
+      name: "上智大",
+      backgroundColor: "#800000",
+      id: 94,
     },
     {
       name: "千葉大",
@@ -106,11 +112,7 @@ function App() {
       backgroundColor: "#000000",
       id: 251,
     },
-    {
-      name: "上智大",
-      backgroundColor: "#800000",
-      id: 94,
-    },
+    
   ];
   return (
     <div>
@@ -126,6 +128,14 @@ function App() {
                 }
               }
               @keyframes string-fade {
+                0% {
+                  opacity: 0;
+                }
+                100% {
+                  opacity:1;
+                }
+              }
+              @keyframes ribbon {
                 0% {
                   opacity: 0;
                 }
@@ -153,6 +163,7 @@ function App() {
         <div
           style={{
             display: "flex",
+            position: 'relative'
           }}
         >
           {teams.map((team, idx) => (
@@ -190,11 +201,56 @@ function App() {
               </div>
             </div>
           ))}
+          <div
+            style={{
+              bottom:20,
+              right: 160,
+              position:'absolute',
+              width: 77*2,
+              height:10,
+              backgroundColor: 'red',
+              opacity:0,
+              animation: `ribbon 2s ease-out ${teams.length * 0.5 + 1}s forwards`,
+              transform: 'rotate(-5deg)'
+            }}
+          ></div>
+          <div
+            style={{
+              bottom:20,
+              right: 0,
+              position:'absolute',
+              width: 77*2,
+              height:10,
+              backgroundColor: 'red',
+              opacity:0,
+              animation: `ribbon 2s ease-out ${teams.length * 0.5 + 1}s forwards`,
+              transform: 'rotate(-5deg)'
+            }}
+          ></div>
         </div>
+      </div>
+      <div style={{
+        height:100,
+        display: 'flex'
+      }}>
+        <div style={{
+          width: 79*8 -5,
+          fontSize:42,
+          boxShadow: "gray 5px 5px 5px",
+          textAlign: 'center',
+          paddingTop: 15
+        }}>Wind(春風)リーグ</div>
+        <div style={{
+          width: 79*10 - 5,
+          fontSize:42,
+          boxShadow: "gray 5px 5px 5px",
+          textAlign: 'center',
+          paddingTop: 15
+        }}>Shine(春光)リーグ</div>
       </div>
       <div
         style={{
-          animation: `string-fade 3s ease-out ${teams.length * 0.5}s forwards`,
+          animation: `string-fade 3s ease-out ${teams.length * 0.5 + 3}s forwards`,
           opacity: 0,
           position: 'relative'
         }}
@@ -222,7 +278,7 @@ function App() {
           }}
         >
           仲間とつかめ、<span style={{
-            animation: `spring 2s ease-out ${teams.length * 0.5 + 3}s forwards`,
+            animation: `spring 2s ease-out ${teams.length * 0.5 + 4}s forwards`,
             color: 'black'
           }}>春</span>の栄冠。
         </div>
