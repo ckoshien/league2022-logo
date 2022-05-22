@@ -1,0 +1,85 @@
+.loading {
+    animation: spin_anim 3.5s linear 0s 2;
+    width: 200px;
+    height: 200px;
+  .rect {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 37px;
+    height: 30px;
+    background-color: black;
+    @for $i from 0 through 9 {
+      &:nth-of-type(#{$i + 1}) {
+        transform: rotate(18deg * $i);
+      }
+    }
+  }
+  @keyframes move {
+    0% {
+      left: -100px;
+    }
+    100% {
+      left: 220px;
+    }
+  }
+  @keyframes hop {
+    0% {
+      bottom: -110px;
+    }
+    100% {
+      bottom: 0px;
+    }
+  }
+  @keyframes batting {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-60deg);
+    }
+  }
+  @keyframes move2 {
+    0% {
+      left: 0px;
+    }
+    100% {
+      left: 310px;
+    }
+  }
+  @keyframes move3 {
+    0% {
+      bottom: 0px;
+      left: 220px;
+    }
+    100% {
+      bottom: -10px;
+      left: 155px;
+    }
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  /* アニメーション */
+  @keyframes spin_anim {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    50% {
+      transform: rotate(180deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
