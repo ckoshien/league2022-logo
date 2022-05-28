@@ -32,7 +32,7 @@ function App() {
       name: "早大臙脂",
       backgroundColor: "#9B003F",
       id: 162,
-      result: [0, 0, 0],
+      result: [1, 1, 0],
     },
     {
       name: "アルパコラ",
@@ -44,7 +44,7 @@ function App() {
       name: "横国みなと",
       backgroundColor: "#1955A6",
       id: 57,
-      result: [2, 0, 0],
+      result: [2, 2, 0],
     },
     {
       name: "横国みらい",
@@ -56,25 +56,25 @@ function App() {
       name: "生田農工大",
       backgroundColor: "#483698",
       id: 61,
-      result: [0, 2, 0],
+      result: [2, 2, 0],
     },
     {
       name: "三田",
       backgroundColor: "#001E62",
       id: 106,
-      result: [1, 0, 1],
+      result: [3, 0, 1],
     },
     {
       name: "上智/Eintracht",
       backgroundColor: "#ED591A",
       id: 202,
-      result: [0, 2, 0],
+      result: [1, 3, 0],
     },
     {
       name: "千葉/専修",
       backgroundColor: "#C6002F",
       id: 111,
-      result: [0, 0, 0],
+      result: [0, 2, 0],
     },
   ];
   const winds = [
@@ -82,49 +82,49 @@ function App() {
       name: "早大紺碧",
       backgroundColor: "#9B003F",
       id: 162,
-      result: [0, 0, 0],
+      result: [1, 0, 1],
     },
     {
       name: "横国ときわ",
       backgroundColor: "#1955A6",
       id: 57,
-      result: [2, 0, 0],
+      result: [4, 0, 0],
     },
     {
       name: "城東",
       backgroundColor: "#00007B",
       id: 232,
-      result: [0, 0, 0],
+      result: [2, 0, 0],
     },
     {
       name: "短冊",
       backgroundColor: "#DC143C",
       id: 58,
-      result: [0, 0, 0],
+      result: [0, 2, 0],
     },
     {
       name: "世田谷",
       backgroundColor: "#1D6D3F",
       id: 65,
-      result: [0, 0, 0],
+      result: [0, 2, 0],
     },
     {
       name: "東京大",
       backgroundColor: "#ADD8E6",
       id: 155,
-      result: [0, 2, 0],
+      result: [0, 3, 1],
     },
     {
       name: "目白",
       backgroundColor: "#79CAFF",
       id: 73,
-      result: [0, 0, 0],
+      result: [1, 1, 0],
     },
     {
       name: "青山学院大",
       backgroundColor: "#277559",
       id: 239,
-      result: [0, 0, 0],
+      result: [1, 1, 0],
     },
   ];
 
@@ -161,6 +161,10 @@ function App() {
                 }
                 if(b.result[0] + b.result[1] === 0){
                   return -1;
+                }
+                if(b.result[0] / (b.result[0] + b.result[1]) ===
+                a.result[0] / (a.result[0] + a.result[1])){
+                  return b.result[0] - a.result[0];
                 }
                 return (
                   b.result[0] / (b.result[0] + b.result[1]) -
