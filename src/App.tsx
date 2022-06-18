@@ -27,104 +27,104 @@ function App() {
       ></div>
     );
   };
-  const shines = [
-    {
-      name: "早大臙脂",
-      backgroundColor: "#9B003F",
-      id: 162,
-      result: [3, 1, 0],
-    },
-    {
-      name: "アルパコラ",
-      backgroundColor: "#DC143C",
-      id: 58,
-      result: [1, 4, 1],
-    },
-    {
-      name: "横国みなと",
-      backgroundColor: "#1955A6",
-      id: 57,
-      result: [5, 2, 1],
-    },
-    {
-      name: "横国みらい",
-      backgroundColor: "#1955A6",
-      id: 57,
-      result: [3, 2, 1],
-    },
-    {
-      name: "生田農工大",
-      backgroundColor: "#483698",
-      id: 61,
-      result: [4, 4, 0],
-    },
-    {
-      name: "三田",
-      backgroundColor: "#001E62",
-      id: 106,
-      result: [5, 0, 1],
-    },
-    {
-      name: "上智/Eintracht",
-      backgroundColor: "#ED591A",
-      id: 202,
-      result: [2, 6, 0],
-    },
-    {
-      name: "千葉/専修",
-      backgroundColor: "#C6002F",
-      id: 111,
-      result: [1, 5, 0],
-    },
-  ];
+  // const shines = [
+  //   {
+  //     name: "早大臙脂",
+  //     backgroundColor: "#9B003F",
+  //     id: 162,
+  //     result: [3, 1, 0],
+  //   },
+  //   {
+  //     name: "アルパコラ",
+  //     backgroundColor: "#DC143C",
+  //     id: 58,
+  //     result: [1, 4, 1],
+  //   },
+  //   {
+  //     name: "横国みなと",
+  //     backgroundColor: "#1955A6",
+  //     id: 57,
+  //     result: [5, 2, 1],
+  //   },
+  //   {
+  //     name: "横国みらい",
+  //     backgroundColor: "#1955A6",
+  //     id: 57,
+  //     result: [3, 2, 1],
+  //   },
+  //   {
+  //     name: "生田農工大",
+  //     backgroundColor: "#483698",
+  //     id: 61,
+  //     result: [4, 4, 0],
+  //   },
+  //   {
+  //     name: "三田",
+  //     backgroundColor: "#001E62",
+  //     id: 106,
+  //     result: [5, 0, 1],
+  //   },
+  //   {
+  //     name: "上智/Eintracht",
+  //     backgroundColor: "#ED591A",
+  //     id: 202,
+  //     result: [2, 6, 0],
+  //   },
+  //   {
+  //     name: "千葉/専修",
+  //     backgroundColor: "#C6002F",
+  //     id: 111,
+  //     result: [1, 5, 0],
+  //   },
+  // ];
   const winds = [
     {
-      name: "早大紺碧",
-      backgroundColor: "#9B003F",
-      id: 162,
+      name: "賀茂別雷",
+      backgroundColor: "#173be6",
+      id: 206,
       result: [4, 1, 1],
     },
     {
-      name: "横国ときわ",
-      backgroundColor: "#1955A6",
-      id: 57,
+      name: "京大嵐山",
+      backgroundColor: "#23232b",
+      id: 72,
       result: [7, 1, 0],
     },
     {
-      name: "城東",
-      backgroundColor: "#00007B",
-      id: 232,
-      result: [6, 2, 0],
+      name: "京大宇治",
+      backgroundColor: "#23232b",
+      id: 72,
+      result: [7, 1, 0],
     },
     {
-      name: "短冊",
-      backgroundColor: "#DC143C",
-      id: 58,
-      result: [2, 4, 0],
+      name: "大阪公立大COMUC",
+      backgroundColor: "#3b0e83",
+      id: 230,
+      result: [7, 1, 0],
     },
     {
-      name: "世田谷",
-      backgroundColor: "#1D6D3F",
-      id: 65,
-      result: [1, 4, 1],
+      name: "京大貴船",
+      backgroundColor: "#23232b",
+      id: 72,
+      result: [7, 1, 0],
     },
     {
-      name: "東京大",
-      backgroundColor: "#ADD8E6",
-      id: 155,
-      result: [1, 5, 2],
+      name: "龍谷立命近大連合",
+      backgroundColor: "#f66f59",
+      id: 0,
+      result: [7, 1, 0],
     },
     {
-      name: "目白",
-      backgroundColor: "#79CAFF",
-      id: 73,
-      result: [3, 5, 0],
+      name: "大阪大",
+      backgroundColor: "#0b1430",
+      id: 105,
+      result: [7, 1, 0],
     },
     {
-      name: "青山学院大",
-      backgroundColor: "#277559",
-      id: 239,
-      result: [2, 4, 0],
+      name: "名古屋大",
+      backgroundColor: "#53783c",
+      id: 85,
+      result: [7, 1, 0],
     },
   ];
 
@@ -152,25 +152,25 @@ function App() {
         >
           <div>
             {teams
-              .sort((a, b) => {
-                if(a.result[0] + a.result[1] === 0 && b.result[0] + b.result[1] === 0){
-                  return 0;
-                }
-                if(a.result[0] + a.result[1] === 0){
-                  return 1;
-                }
-                if(b.result[0] + b.result[1] === 0){
-                  return -1;
-                }
-                if(b.result[0] / (b.result[0] + b.result[1]) ===
-                a.result[0] / (a.result[0] + a.result[1])){
-                  return b.result[0] - a.result[0];
-                }
-                return (
-                  b.result[0] / (b.result[0] + b.result[1]) -
-                  a.result[0] / (a.result[0] + a.result[1])
-                );
-              })
+              // .sort((a, b) => {
+              //   if(a.result[0] + a.result[1] === 0 && b.result[0] + b.result[1] === 0){
+              //     return 0;
+              //   }
+              //   if(a.result[0] + a.result[1] === 0){
+              //     return 1;
+              //   }
+              //   if(b.result[0] + b.result[1] === 0){
+              //     return -1;
+              //   }
+              //   if(b.result[0] / (b.result[0] + b.result[1]) ===
+              //   a.result[0] / (a.result[0] + a.result[1])){
+              //     return b.result[0] - a.result[0];
+              //   }
+              //   return (
+              //     b.result[0] / (b.result[0] + b.result[1]) -
+              //     a.result[0] / (a.result[0] + a.result[1])
+              //   );
+              // })
               .map((team, idx) => (
                 <div>
                   <div
@@ -212,7 +212,8 @@ function App() {
                         fontWeight: "bold",
                       }}
                     >
-                      {team.result[0]}勝{team.result[1]}敗{team.result[2]}分
+                      {idx + 1}位
+                      {/* {team.result[0]}勝{team.result[1]}敗{team.result[2]}分 */}
                     </div>
                   </div>
                 </div>
@@ -229,11 +230,11 @@ function App() {
       }}
     >
       <div>
-        <Teams title="Windリーグ" teams={winds} />
+        <Teams title="Welcome Cap Festa 2022" teams={winds} />
       </div>
-      <div>
+      {/* <div>
         <Teams title="Shineリーグ" teams={shines} />
-      </div>
+      </div> */}
       <style>
         {[0,1,2,3,4,5,6,7].map((team, idx) => (
           <>
