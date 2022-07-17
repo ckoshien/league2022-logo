@@ -32,49 +32,49 @@ function App() {
       name: "早大臙脂",
       backgroundColor: "#9B003F",
       id: 162,
-      result: [3, 1, 0],
+      result: [7, 5, 0],
     },
     {
       name: "アルパコラ",
       backgroundColor: "#DC143C",
       id: 58,
-      result: [1, 4, 1],
+      result: [1, 10, 1],
     },
     {
       name: "横国みなと",
       backgroundColor: "#1955A6",
       id: 57,
-      result: [5, 2, 1],
+      result: [9, 2, 1],
     },
     {
       name: "横国みらい",
       backgroundColor: "#1955A6",
       id: 57,
-      result: [3, 2, 1],
+      result: [8, 2, 2],
     },
     {
       name: "生田農工大",
       backgroundColor: "#483698",
       id: 61,
-      result: [4, 4, 0],
+      result: [6, 6, 0],
     },
     {
       name: "三田",
       backgroundColor: "#001E62",
       id: 106,
-      result: [5, 0, 1],
+      result: [8, 2, 2],
     },
     {
-      name: "上智/Eintracht",
+      name: "Eintracht/上智",
       backgroundColor: "#ED591A",
       id: 202,
-      result: [2, 6, 0],
+      result: [4, 8, 0],
     },
     {
       name: "千葉/専修",
       backgroundColor: "#C6002F",
       id: 111,
-      result: [1, 5, 0],
+      result: [2, 10, 0],
     },
   ];
   const winds = [
@@ -82,49 +82,49 @@ function App() {
       name: "早大紺碧",
       backgroundColor: "#9B003F",
       id: 162,
-      result: [4, 1, 1],
+      result: [10, 1, 1],
     },
     {
       name: "横国ときわ",
       backgroundColor: "#1955A6",
       id: 57,
-      result: [7, 1, 0],
+      result: [9, 1, 0],
     },
     {
       name: "城東",
       backgroundColor: "#00007B",
       id: 232,
-      result: [6, 2, 0],
+      result: [8, 4, 0],
     },
     {
       name: "短冊",
       backgroundColor: "#DC143C",
       id: 58,
-      result: [2, 4, 0],
+      result: [3, 7, 0],
     },
     {
       name: "世田谷",
       backgroundColor: "#1D6D3F",
       id: 65,
-      result: [1, 4, 1],
+      result: [2, 9, 1],
     },
     {
       name: "東京大",
       backgroundColor: "#ADD8E6",
       id: 155,
-      result: [1, 5, 2],
+      result: [2, 7, 3],
     },
     {
       name: "目白",
       backgroundColor: "#79CAFF",
       id: 73,
-      result: [3, 5, 0],
+      result: [4, 7, 1],
     },
     {
       name: "青山学院大",
       backgroundColor: "#277559",
       id: 239,
-      result: [2, 4, 0],
+      result: [5, 7, 0],
     },
   ];
 
@@ -199,7 +199,7 @@ function App() {
                         height: 74,
                         padding: "0 5px",
                         fontWeight: "bold",
-                        width: "60%",
+                        width: "50%",
                       }}
                     >
                       {team.name}
@@ -210,10 +210,23 @@ function App() {
                         fontSize: 30,
                         height: 74,
                         fontWeight: "bold",
+                        textAlign:'right'
                       }}
                     >
                       {team.result[0]}勝{team.result[1]}敗{team.result[2]}分
                     </div>
+                    <span
+                      style={{
+                        fontSize: 24,
+                        height: 34,
+                        backgroundColor: "white",
+                        margin:'4px 4px 0px 8px',
+                        padding:4,
+                        color: team.backgroundColor
+                      }}
+                    >
+                      残{`${14 - team.result[0] - team.result[1] - team.result[2]}`}
+                    </span>
                   </div>
                 </div>
               ))}
