@@ -1,11 +1,67 @@
+import { useCallback, useEffect, useState } from "react";
+
 type TeamType = {
   name: string;
   backgroundColor: string;
-  id: number;
-  result: number[];
+  teamId: number;
+  value: number;
 };
 
 function App() {
+  const [data, setData] = useState<any>(null);
+  useEffect(() => {
+    const f = async () => {
+      const response = await fetch(
+        "https://jcbl-score.com/api/v2/league/cap_baseball/season/34"
+      );
+      const res = await response.json();
+      setData(res);
+    };
+    f();
+  }, []);
+
+  const calcRank = useCallback(
+    (
+      data: any[],
+      param: string,
+      sliceNum: number,
+      order: "asc" | "desc",
+      regulationParam: "tpa" | "inning",
+      regulationNum?: number
+    ) => {
+      if (!data) return [];
+      const target = data
+        .filter((player) => {
+          if (regulationNum) {
+            return player[regulationParam] >= regulationNum;
+          } else {
+            return true;
+          }
+        })
+        .sort((a, b) => {
+          if (order === "asc") {
+            return a[param] - b[param];
+          } else {
+            return b[param] - a[param];
+          }
+        });
+      if (target.length > sliceNum) {
+        if (order === "desc") {
+          return target.filter((player) => {
+            return player[param] >= target[sliceNum - 1][param];
+          });
+        } else {
+          return target.filter((player) => {
+            return player[param] <= target[sliceNum - 1][param];
+          });
+        }
+      } else {
+        return target;
+      }
+    },
+    []
+  );
+
   const CircleIcon: React.FC<{ thumbnail_url: string; width: number }> = ({
     thumbnail_url,
     width,
@@ -27,7 +83,7 @@ function App() {
       ></div>
     );
   };
-  const shines = [
+  const winds=[
     {
       name: "早大臙脂",
       backgroundColor: "#9B003F",
@@ -76,57 +132,69 @@ function App() {
       id: 111,
       result: [2, 10, 0],
     },
-  ];
-  const winds = [
     {
-      name: "早大紺碧",
-      backgroundColor: "#9B003F",
-      id: 162,
-      result: [10, 1, 1],
+      name: "千葉/専修",
+      backgroundColor: "#C6002F",
+      id: 320,
+      result: [2, 10, 0],
     },
     {
-      name: "横国ときわ",
-      backgroundColor: "#1955A6",
-      id: 57,
-      result: [9, 1, 0],
+      name: "専修",
+      backgroundColor: "#3fd021",
+      id: 251,
+      result: [2, 10, 0],
     },
-    {
-      name: "城東",
-      backgroundColor: "#00007B",
-      id: 232,
-      result: [8, 4, 0],
-    },
-    {
-      name: "短冊",
-      backgroundColor: "#DC143C",
-      id: 58,
-      result: [3, 7, 0],
-    },
-    {
-      name: "世田谷",
-      backgroundColor: "#1D6D3F",
-      id: 65,
-      result: [2, 9, 1],
-    },
-    {
-      name: "東京大",
-      backgroundColor: "#ADD8E6",
-      id: 155,
-      result: [2, 7, 3],
-    },
-    {
-      name: "目白",
-      backgroundColor: "#79CAFF",
-      id: 73,
-      result: [4, 7, 1],
-    },
-    {
-      name: "青山学院大",
-      backgroundColor: "#277559",
-      id: 239,
-      result: [5, 7, 0],
-    },
-  ];
+  ]
+  // const winds = [
+  //   {
+  //     name: "早大紺碧",
+  //     backgroundColor: "#9B003F",
+  //     id: 162,
+  //     result: [10, 1, 1],
+  //   },
+  //   {
+  //     name: "横国ときわ",
+  //     backgroundColor: "#1955A6",
+  //     id: 57,
+  //     result: [9, 1, 0],
+  //   },
+  //   {
+  //     name: "城東",
+  //     backgroundColor: "#00007B",
+  //     id: 232,
+  //     result: [8, 4, 0],
+  //   },
+  //   {
+  //     name: "短冊",
+  //     backgroundColor: "#DC143C",
+  //     id: 58,
+  //     result: [3, 7, 0],
+  //   },
+  //   {
+  //     name: "世田谷",
+  //     backgroundColor: "#1D6D3F",
+  //     id: 65,
+  //     result: [2, 9, 1],
+  //   },
+  //   {
+  //     name: "東京大",
+  //     backgroundColor: "#ADD8E6",
+  //     id: 155,
+  //     result: [2, 7, 3],
+  //   },
+  //   {
+  //     name: "目白",
+  //     backgroundColor: "#79CAFF",
+  //     id: 73,
+  //     result: [4, 7, 1],
+  //   },
+  //   {
+  //     name: "青山学院大",
+  //     backgroundColor: "#277559",
+  //     id: 239,
+  //     result: [5, 7, 0],
+  //   },
+  // ];
 
   const Teams: React.FC<{ title: string; teams: TeamType[] }> = ({
     teams,
@@ -136,8 +204,8 @@ function App() {
       <>
         <div
           style={{
-            width: 605,
-            fontSize: 42,
+            width: 200,
+            fontSize: 20,
             boxShadow: "gray 5px 5px 5px",
             textAlign: "center",
             paddingTop: 15,
@@ -147,181 +215,241 @@ function App() {
         </div>
         <div
           style={{
-            height: 80 * 8,
+            //height: 50 * 5,
           }}
         >
           <div>
-            {teams
-              .sort((a, b) => {
-                if(a.result[0] + a.result[1] === 0 && b.result[0] + b.result[1] === 0){
-                  return 0;
-                }
-                if(a.result[0] + a.result[1] === 0){
-                  return 1;
-                }
-                if(b.result[0] + b.result[1] === 0){
-                  return -1;
-                }
-                if(b.result[0] / (b.result[0] + b.result[1]) ===
-                a.result[0] / (a.result[0] + a.result[1])){
-                  return b.result[0] - a.result[0];
-                }
-                return (
-                  b.result[0] / (b.result[0] + b.result[1]) -
-                  a.result[0] / (a.result[0] + a.result[1])
-                );
-              })
-              .map((team, idx) => (
-                <div>
+            {teams.map((team, idx) => (
+              <div>
+                <div
+                  className="team"
+                  style={{
+                    display: "flex",
+                    zIndex: 10000,
+                    height: 40,
+                    width: 195,
+                    margin: 5,
+                    backgroundColor: team.backgroundColor,
+                    boxShadow: "gray 5px 5px 5px",
+                    //transform: "translateY(-800px)",
+                    //animation: `move${idx} 1s ease-out ${8 - idx}s forwards`,
+                  }}
+                >
+                  <CircleIcon
+                    thumbnail_url={`https://cap-baseball.com/images/${team.teamId}.jpg`}
+                    width={30}
+                  />
                   <div
-                    className="team"
                     style={{
-                      display: "flex",
-                      zIndex: 10000,
+                      color: "white",
+                      fontSize: 18,
                       height: 74,
-                      width: 600,
-                      margin: 5,
-                      backgroundColor: team.backgroundColor,
-                      opacity: team.result[0] + team.result[1] === 0 ? 0.3 :1,
-                      boxShadow: "gray 5px 5px 5px",
-                      transform: "translateY(-800px)",
-                      animation: `move${idx} 1s ease-out ${8 - idx}s forwards`,
+                      padding: "0 5px",
+                      fontWeight: "bold",
+                      width: "60%",
                     }}
                   >
-                    <CircleIcon
-                      thumbnail_url={`https://cap-baseball.com/images/${team.id}.jpg`}
-                      width={64}
-                    />
-                    <div
-                      style={{
-                        color: "white",
-                        fontSize: 40,
-                        height: 74,
-                        padding: "0 5px",
-                        fontWeight: "bold",
-                        width: "50%",
-                      }}
-                    >
-                      {team.name}
-                    </div>
-                    <div
-                      style={{
-                        color: "white",
-                        fontSize: 30,
-                        height: 74,
-                        fontWeight: "bold",
-                        textAlign:'right'
-                      }}
-                    >
-                      {team.result[0]}勝{team.result[1]}敗{team.result[2]}分
-                    </div>
-                    <span
-                      style={{
-                        fontSize: 24,
-                        height: 34,
-                        backgroundColor: "white",
-                        margin:'4px 4px 0px 8px',
-                        padding:4,
-                        color: team.backgroundColor
-                      }}
-                    >
-                      残{`${14 - team.result[0] - team.result[1] - team.result[2]}`}
-                    </span>
+                    {team.name}
+                  </div>
+                  <div
+                    style={{
+                      color: "white",
+                      fontSize: 18,
+                      height: 74,
+                      fontWeight: "bold",
+                      textAlign: "right",
+                      width:'20%',
+                      marginRight:5
+                    }}
+                  >
+                    {team.value}
                   </div>
                 </div>
-              ))}
+              </div>
+            ))}
           </div>
         </div>
       </>
     );
   };
+
+  const decideTeam = (league:any[], player:any)=>{
+    const target = league.filter((team) => {
+      return team.id === player.teamId;
+    })
+    const target2 = league.filter((team) => {
+      return team.id === player.myteam_id;
+    })
+    if(target[0]){
+      return target[0]
+    } else{
+      return target2[0]
+    }
+      
+  }
+
+  if (!data) return <></>;
   return (
     <div
       style={{
         display: "flex",
+        flexWrap: "wrap",
       }}
     >
       <div>
-        <Teams title="Windリーグ" teams={winds} />
+        <Teams
+          title="Shine/打率"
+          teams={calcRank(
+            data.battingResultList,
+            "average",
+            5,
+            "desc",
+            "tpa",
+            22.3
+          ).map((player) => {
+            return {
+              name: player.real_name,
+              teamId: decideTeam(winds, player).id,
+              backgroundColor: decideTeam(winds, player).backgroundColor,
+              value: player.average.toFixed(3),
+            };
+          })}
+        />
       </div>
       <div>
-        <Teams title="Shineリーグ" teams={shines} />
-      </div>
-      <style>
-        {[0,1,2,3,4,5,6,7].map((team, idx) => (
-          <>
-            {`@keyframes move${idx} {
-                0% {
-                    transform: translateY(-405px);
-                }
-                100% {
-                  transform: translateY(0px);
-                }
-              }
-              `}
-          </>
-        ))}
-      </style>
-
-      {/* <div
-        style={{
-          animation: `string-fade 3s ease-out ${winds.length * 0.5 + 3}s forwards`,
-          opacity: 0,
-          position: 'relative'
-        }}
-      >
-        <img
-          width={1440}
-          height={400}
-          src={'/league2022-logo/sakurafubuki-bg-768x576.jpg'}
-          style={{
-            objectFit: 'cover',
-            position: 'absolute',
-            top:0,
-            opacity: 0.4
-          }}
+        <Teams
+          title="Shine/本塁打"
+          teams={calcRank(
+            data.battingResultList,
+            "homerun",
+            5,
+            "desc",
+            "tpa",
+          ).map((player) => {
+            return {
+              name: player.real_name,
+              teamId: decideTeam(winds, player)?.id,
+              backgroundColor: decideTeam(winds, player)?.backgroundColor,
+              value: player.homerun,
+            };
+          })}
         />
-        <div
-          style={{
-            height: 140,
-            width: winds.length*79,
-            fontSize: 70,
-            paddingTop: 60,
-            textAlign: "center",
-            fontWeight: 'bold',
-            position: 'absolute'
-          }}
-        >
-          仲間とつかめ、<span style={{
-            animation: `spring 2s ease-out ${winds.length * 0.5 + 4}s forwards`,
-            color: 'black'
-          }}>春</span>の栄冠。
-        </div>
-        <div
-          style={{
-            height: 140,
-            fontSize: 44,
-            textAlign: "center",
-            width: winds.length*74,
-            position: 'absolute',
-            top:230
-          }}
-        >
-          関東キャップリーグ 2022 春季
-        </div>
-        <div
-          style={{
-            height: 140,
-            fontSize: 34,
-            textAlign: "center",
-            width: winds.length*79,
-            position: 'absolute',
-            top: 350
-          }}
-        >
-          5/21[土]～8/20[土]
-        </div>
-      </div> */}
+      </div>
+      <div>
+        <Teams
+          title="Shine/安打"
+          teams={calcRank(
+            data.battingResultList,
+            "hit",
+            5,
+            "desc",
+            "tpa",
+          ).map((player) => {
+            return {
+              name: player.real_name,
+              teamId: decideTeam(winds, player).id,
+              backgroundColor: decideTeam(winds, player).backgroundColor,
+              value: player.hit,
+            };
+          })}
+        />
+      </div>
+      <div>
+        <Teams
+          title="Shine/打点"
+          teams={calcRank(
+            data.battingResultList,
+            "rbi",
+            5,
+            "desc",
+            "tpa",
+          ).map((player) => {
+            return {
+              name: player.real_name,
+              teamId: decideTeam(winds, player)?.id,
+              backgroundColor: decideTeam(winds, player)?.backgroundColor,
+              value: player.rbi,
+            };
+          })}
+        />
+      </div>
+      <div>
+        <Teams
+          title="Shine/防御率"
+          teams={calcRank(
+            data.pitchingResultList,
+            "era",
+            5,
+            "asc",
+            "inning",
+            9.33
+          ).map((player) => {
+            return {
+              name: player.real_name,
+              teamId: decideTeam(winds, player).id,
+              backgroundColor: decideTeam(winds, player).backgroundColor,
+              value: player.era.toFixed(2),
+            };
+          })}
+        />
+      </div>
+      <div>
+        <Teams
+          title="Shine/勝利"
+          teams={calcRank(
+            data.pitchingResultList,
+            "win",
+            5,
+            "desc",
+            "inning",
+          ).map((player) => {
+            return {
+              name: player.real_name,
+              teamId: decideTeam(winds, player).id,
+              backgroundColor: decideTeam(winds, player).backgroundColor,
+              value: player.win,
+            };
+          })}
+        />
+      </div>
+      <div>
+        <Teams
+          title="Shine/セーブ"
+          teams={calcRank(
+            data.pitchingResultList,
+            "save",
+            5,
+            "desc",
+            "inning",
+          ).map((player) => {
+            return {
+              name: player.real_name,
+              teamId: decideTeam(winds, player).id,
+              backgroundColor: decideTeam(winds, player).backgroundColor,
+              value: player.save,
+            };
+          })}
+        />
+      </div>
+      <div>
+        <Teams
+          title="Shine/奪三振"
+          teams={calcRank(
+            data.pitchingResultList,
+            "strike_out",
+            5,
+            "desc",
+            "inning",
+          ).map((player) => {
+            return {
+              name: player.real_name,
+              teamId: decideTeam(winds, player).id,
+              backgroundColor: decideTeam(winds, player).backgroundColor,
+              value: player.strike_out,
+            };
+          })}
+        />
+      </div>
     </div>
   );
 }
