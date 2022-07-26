@@ -3,6 +3,7 @@ type TeamType = {
   backgroundColor: string;
   id: number;
   result: number[];
+  rank?: number;
 };
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
       backgroundColor: "#9B003F",
       id: 162,
       result: [7, 5, 0],
+      rank: 4,
     },
     {
       name: "アルパコラ",
@@ -50,31 +52,33 @@ function App() {
       name: "横国みらい",
       backgroundColor: "#1955A6",
       id: 57,
-      result: [8, 2, 2],
+      result: [9, 3, 2],
     },
     {
       name: "生田農工大",
       backgroundColor: "#483698",
       id: 61,
-      result: [6, 6, 0],
+      result: [7, 7, 0],
+      rank: 5,
     },
     {
       name: "三田",
       backgroundColor: "#001E62",
       id: 106,
-      result: [8, 2, 2],
+      result: [9, 3, 2],
     },
     {
       name: "Eintracht/上智",
       backgroundColor: "#ED591A",
       id: 202,
       result: [4, 8, 0],
+      rank: 6,
     },
     {
       name: "千葉/専修",
       backgroundColor: "#C6002F",
       id: 111,
-      result: [2, 10, 0],
+      result: [3, 11, 0],
     },
   ];
   const winds = [
@@ -82,49 +86,52 @@ function App() {
       name: "早大紺碧",
       backgroundColor: "#9B003F",
       id: 162,
-      result: [10, 1, 1],
+      result: [11, 2, 1],
     },
     {
       name: "横国ときわ",
       backgroundColor: "#1955A6",
       id: 57,
-      result: [9, 1, 0],
+      result: [10, 2, 0],
     },
     {
       name: "城東",
       backgroundColor: "#00007B",
       id: 232,
-      result: [8, 4, 0],
+      result: [9, 5, 0],
+      rank: 3,
     },
     {
       name: "短冊",
       backgroundColor: "#DC143C",
       id: 58,
-      result: [3, 7, 0],
+      result: [5, 7, 0],
     },
     {
       name: "世田谷",
       backgroundColor: "#1D6D3F",
       id: 65,
-      result: [2, 9, 1],
+      result: [2, 10, 2],
+      rank: 8,
     },
     {
       name: "東京大",
       backgroundColor: "#ADD8E6",
       id: 155,
-      result: [2, 7, 3],
+      result: [2, 9, 3],
+      rank: 7,
     },
     {
       name: "目白",
       backgroundColor: "#79CAFF",
       id: 73,
-      result: [4, 7, 1],
+      result: [5, 7, 2],
     },
     {
       name: "青山学院大",
       backgroundColor: "#277559",
       id: 239,
-      result: [5, 7, 0],
+      result: [6, 8, 0],
     },
   ];
 
@@ -153,17 +160,22 @@ function App() {
           <div>
             {teams
               .sort((a, b) => {
-                if(a.result[0] + a.result[1] === 0 && b.result[0] + b.result[1] === 0){
+                if (
+                  a.result[0] + a.result[1] === 0 &&
+                  b.result[0] + b.result[1] === 0
+                ) {
                   return 0;
                 }
-                if(a.result[0] + a.result[1] === 0){
+                if (a.result[0] + a.result[1] === 0) {
                   return 1;
                 }
-                if(b.result[0] + b.result[1] === 0){
+                if (b.result[0] + b.result[1] === 0) {
                   return -1;
                 }
-                if(b.result[0] / (b.result[0] + b.result[1]) ===
-                a.result[0] / (a.result[0] + a.result[1])){
+                if (
+                  b.result[0] / (b.result[0] + b.result[1]) ===
+                  a.result[0] / (a.result[0] + a.result[1])
+                ) {
                   return b.result[0] - a.result[0];
                 }
                 return (
@@ -182,12 +194,36 @@ function App() {
                       width: 600,
                       margin: 5,
                       backgroundColor: team.backgroundColor,
-                      opacity: team.result[0] + team.result[1] === 0 ? 0.3 :1,
+                      opacity: team.result[0] + team.result[1] === 0 ? 0.3 : 1,
                       boxShadow: "gray 5px 5px 5px",
                       transform: "translateY(-800px)",
                       animation: `move${idx} 1s ease-out ${8 - idx}s forwards`,
                     }}
                   >
+                    <span
+                      style={{
+                        fontSize: 24,
+                        height: 34,
+                        backgroundColor: team.rank? "white" :'transparent',
+                        margin: "12px 4px 0px 8px",
+                        padding: 4,
+                        color: 'white',
+                      }}
+                    >
+                      {team.rank ? (
+                        <span style={{ color: team.backgroundColor }}>{team.rank + "位"}</span>
+                      ) : (
+                        <>
+                          残
+                          {`${
+                            14 -
+                            team.result[0] -
+                            team.result[1] -
+                            team.result[2]
+                          }`}
+                        </>
+                      )}
+                    </span>
                     <CircleIcon
                       thumbnail_url={`https://cap-baseball.com/images/${team.id}.jpg`}
                       width={64}
@@ -210,23 +246,11 @@ function App() {
                         fontSize: 30,
                         height: 74,
                         fontWeight: "bold",
-                        textAlign:'right'
+                        textAlign: "right",
                       }}
                     >
                       {team.result[0]}勝{team.result[1]}敗{team.result[2]}分
                     </div>
-                    <span
-                      style={{
-                        fontSize: 24,
-                        height: 34,
-                        backgroundColor: "white",
-                        margin:'4px 4px 0px 8px',
-                        padding:4,
-                        color: team.backgroundColor
-                      }}
-                    >
-                      残{`${14 - team.result[0] - team.result[1] - team.result[2]}`}
-                    </span>
                   </div>
                 </div>
               ))}
@@ -248,7 +272,7 @@ function App() {
         <Teams title="Shineリーグ" teams={shines} />
       </div>
       <style>
-        {[0,1,2,3,4,5,6,7].map((team, idx) => (
+        {[0, 1, 2, 3, 4, 5, 6, 7].map((team, idx) => (
           <>
             {`@keyframes move${idx} {
                 0% {
