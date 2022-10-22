@@ -20,293 +20,117 @@ function App() {
       ></div>
     );
   };
-  const teams = [
-    {
-      name: "早大紺碧",
-      backgroundColor: "#9B003F",
-      id: 162,
-    },
-    {
-      name: "横国ときわ",
-      backgroundColor: "#1955A6",
-      id: 57,
-    },
-    {
-      name: "城東",
-      backgroundColor: "#00007B",
-      id: 232,
-    },
-    {
-      name: "短冊",
-      backgroundColor: "#DC143C",
-      id: 58,
-    },
-    {
-      name: "世田谷",
-      backgroundColor: "#1D6D3F",
-      id: 65,
-    },
-    {
-      name: "東京大",
-      backgroundColor: "#ADD8E6",
-      id: 155,
-    },
-    {
-      name: "目白",
-      backgroundColor: "#79CAFF",
-      id: 73,
-    },
-    {
-      name: "青山学院大",
-      backgroundColor: "#277559",
-      id: 239,
-    },
-    
-    {
-      name: "早大臙脂",
-      backgroundColor: "#9B003F",
-      id: 162,
-    },
-    {
-      name: "アルパコラ",
-      backgroundColor: "#DC143C",
-      id: 58,
-    },
-    {
-      name: "横国みなと",
-      backgroundColor: "#1955A6",
-      id: 57,
-    },
-    {
-      name: "横国みらい",
-      backgroundColor: "#1955A6",
-      id: 57,
-    },
-    {
-      name: "生田農工大",
-      backgroundColor: "#483698",
-      id: 61,
-    },
-    {
-      name: "三田",
-      backgroundColor: "#001E62",
-      id: 106,
-    },
-    {
-      name: "Eintracht",
-      backgroundColor: "#ED591A",
-      id: 202,
-    },
-    {
-      name: "上智大",
-      backgroundColor: "#800000",
-      id: 94,
-    },
-    {
-      name: "千葉大",
-      backgroundColor: "#C6002F",
-      id: 111,
-    },
-    {
-      name: "専修大",
-      backgroundColor: "#000000",
-      id: 251,
-    },
-    
-  ];
-  return (
-    <div>
-      <style>
-        {teams.map((team, idx) => (
-          <>
-            {`@keyframes move${idx} {
-                0% {
-                    transform: translateY(-405px);
-                }
-                100% {
-                  transform: translateY(0px);
-                }
-              }
-              @keyframes string-fade {
-                0% {
-                  opacity: 0;
-                }
-                100% {
-                  opacity:1;
-                }
-              }
-              @keyframes ribbon {
-                0% {
-                  opacity: 0;
-                }
-                100% {
-                  opacity:1;
-                }
-              }
-              @keyframes spring {
-                0% {
-                  color: black;
-                }
-                100% {
-                  color: #FF66C4;
-                }
-              }
-              `}
-          </>
-        ))}
-      </style>
-      <div
-        style={{
-          height: 400,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            position: 'relative'
-          }}
-        >
-          {teams.map((team, idx) => (
-            <div>
-              <div
-                className="team"
-                style={{
-                  zIndex:10000,
-                  width: 74,
-                  height: 400,
-                  marginRight: 5,
-                  backgroundColor: team.backgroundColor,
-                  boxShadow: "gray 5px 5px 5px",
-                  transform: "translateY(-405px)",
-                  animation: `move${idx} 1s ease-out ${idx * 0.5}s forwards`,
-                }}
-              >
-                <CircleIcon
-                  thumbnail_url={`https://cap-baseball.com/images/${team.id}.jpg`}
-                  width={64}
-                />
-                <div
-                  style={{
-                    color: "white",
-                    fontSize: 46,
-                    width: 74,
-                    marginTop: 20,
-                    writingMode: "vertical-lr",
-                    padding: "0 5px",
-                    fontWeight: 'bold'
-                  }}
-                >
-                  {team.name}
-                </div>
-              </div>
-            </div>
-          ))}
-          <div
-            style={{
-              bottom:20,
-              right: 160,
-              position:'absolute',
-              width: 77*2,
-              height:10,
-              backgroundColor: 'red',
-              opacity:0,
-              animation: `ribbon 2s ease-out ${teams.length * 0.5 + 1}s forwards`,
-              transform: 'rotate(-5deg)'
-            }}
-          ></div>
-          <div
-            style={{
-              bottom:20,
-              right: 0,
-              position:'absolute',
-              width: 77*2,
-              height:10,
-              backgroundColor: 'red',
-              opacity:0,
-              animation: `ribbon 2s ease-out ${teams.length * 0.5 + 1}s forwards`,
-              transform: 'rotate(-5deg)'
-            }}
-          ></div>
-        </div>
-      </div>
-      <div style={{
-        height:100,
-        display: 'flex'
-      }}>
-        <div style={{
-          width: 79*8 -5,
-          fontSize:42,
-          boxShadow: "gray 5px 5px 5px",
-          textAlign: 'center',
-          paddingTop: 15
-        }}>Wind(春風)リーグ</div>
-        <div style={{
-          width: 79*10 - 5,
-          fontSize:42,
-          boxShadow: "gray 5px 5px 5px",
-          textAlign: 'center',
-          paddingTop: 15
-        }}>Shine(春光)リーグ</div>
-      </div>
-      <div
-        style={{
-          animation: `string-fade 3s ease-out ${teams.length * 0.5 + 3}s forwards`,
-          opacity: 0,
-          position: 'relative'
-        }}
-      >
+
+  const alignment = 450;
+  const CenterLogo = () => {
+    return (
+      <>
         <img
-          width={1440}
-          height={400}
-          src={'/league2022-logo/sakurafubuki-bg-768x576.jpg'}
+          src={"https://cap-baseball.com/images/JCBA_white.png"}
           style={{
-            objectFit: 'cover',
-            position: 'absolute',
-            top:0,
-            opacity: 0.4
+            width: 200,
+            position: "absolute",
+            left: (500 - 200) / 2 +alignment,
+            top: 200,
           }}
         />
-        <div
+        <span
           style={{
-            height: 140,
-            width: teams.length*79,
-            fontSize: 70,
-            paddingTop: 60,
-            textAlign: "center",
-            fontWeight: 'bold',
-            position: 'absolute'
+            position: "absolute",
+            left: (500 - 200) / 2 + alignment,
+            top: 290,
+            color: "white",
+            fontSize: 24,
           }}
         >
-          仲間とつかめ、<span style={{
-            animation: `spring 2s ease-out ${teams.length * 0.5 + 4}s forwards`,
-            color: 'black'
-          }}>春</span>の栄冠。
-        </div>
-        <div
+          {"Kanto Cap League"}
+        </span>
+        <span
           style={{
-            height: 140,
-            fontSize: 44,
-            textAlign: "center",
-            width: teams.length*74,
-            position: 'absolute',
-            top:230
+            position: "absolute",
+            left: 220 + alignment,
+            top: 320,
+            color: "white",
+            fontSize: 14,
           }}
         >
-          関東キャップリーグ 2022 春季
+          {"since 2019"}
+        </span>
+      </>
+    );
+  };
+
+  const Circle: React.FC<{ radius: number; teams?: number[]; year: number, rad:number }> =
+    ({ radius, teams, year, rad }) => {
+      return (
+        <div>
+          <div
+            style={{
+              position: "absolute",
+              borderRadius: "50%",
+              height: radius,
+              width: radius,
+              border: "2px solid #74deff",
+              left: alignment - (radius - 500) / 2,
+              top: -(radius - 500) / 2,
+            }}
+          ></div>
+          <div
+            style={{
+              position: "absolute",
+              color: 'white',
+              opacity: 0.6,
+              top:445,
+              left:
+              alignment + (radius*0.66),
+            }}
+          >{year}</div>
+          {teams?.map((team, idx) => (
+            <div
+              style={{
+                position: "absolute",
+                top:
+                  (radius / 2 - 50) *
+                    Math.sin(-2 * Math.PI * ((idx-1) / rad)) +
+                  215,
+                left:
+                  (radius / 2 - 50) *
+                    Math.cos(-2 * Math.PI * ((idx-1) / rad)) +
+                  alignment+ 210,
+              }}
+            >
+              <CircleIcon
+                width={75}
+                thumbnail_url={`https://s3.ap-northeast-1.wasabisys.com/capbaseball/teamIcons/${team}.jpg`}
+              />
+            </div>
+          ))}
         </div>
-        <div
-          style={{
-            height: 140,
-            fontSize: 34,
-            textAlign: "center",
-            width: teams.length*79,
-            position: 'absolute',
-            top: 350
-          }}
-        >
-          5/21[土]～8/20[土]
-        </div>
-      </div>
+      );
+    };
+
+  return (
+    <div
+      style={{
+        width: 1500,
+        height: 500,
+        overflow: "hidden",
+        position: "relative",
+        backgroundImage:
+          "radial-gradient(circle at 50%, #00BAFF 50%, #3dc7fa 60%, #7bd9fb 70%, #93dcf7 80%)",
+      }}
+    >
+      <Circle radius={1300} year={2023} teams={[]} rad={24}/>
+      <Circle radius={1100} year={2022} teams={[239, 251, 155, 232]} rad={28}/>
+      <Circle radius={900} year={2021} teams={[162,202]} rad={24}/>
+      <Circle radius={700} year={2020} teams={[65]} rad={16}/>
+      <Circle
+        radius={500}
+        year={2019}
+        teams={[57, 58, 61, 73, 67, 106, 111, 62, 94]}
+        rad={9}
+      />
+      <CenterLogo />
     </div>
   );
 }
