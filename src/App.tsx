@@ -104,7 +104,8 @@ function App() {
     year: number;
     rad: number;
     borderColor:string;
-  }> = ({ radius, teams, year, rad, borderColor }) => {
+    background?: string;
+  }> = ({ radius, teams, year, rad, borderColor, background }) => {
     return (
       <div>
         <div
@@ -116,6 +117,7 @@ function App() {
             border: `2px solid ${borderColor}`,
             left: alignment - (radius - 500) / 2,
             top: -(radius - 500) / 2,
+            background
           }}
         ></div>
         <div
@@ -216,7 +218,6 @@ function App() {
         ))} */}
       </>
       <KantoLogo />
-      <KansaiLogo />
       <div
         style={{
           marginLeft: -500,
@@ -231,12 +232,15 @@ function App() {
         <Circle
           radius={400}
           year={2022}
-          teams={[246, 300, 230, 136, 105, 72, 107, 87, 132, 137, 303]}
+          teams={[246,87, 300, 230, 136, 303,105, 72, 107,132, 137]}
           rad={11}
           borderColor={'#ff7676'}
+          background={`radial-gradient(circle at 50%, #ff0000cc 50%, #ff0000cc 60%, #ff000033 70%, transparent)`}
         />
         <Circle radius={600} year={2023} teams={[]} rad={16} borderColor={'#ff7676'}/>
       </div>
+      <KansaiLogo />
+      
     </div>
   );
 }
