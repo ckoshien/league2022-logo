@@ -28,116 +28,146 @@ function App() {
       ></div>
     );
   };
+  const wests = [
+    {
+      name: "京阪神連合",
+      backgroundColor: "yellowgreen",
+      id: 354,
+      result: [7, 3, 4],
+    },
+    {
+      name: "京大茜",
+      backgroundColor: "#00205b",
+      id: 72,
+      result: [8, 4, 0],
+    },
+    {
+      name: "賀茂別雷",
+      backgroundColor: "#039",
+      id: 107,
+      result: [8, 4, 2],
+    },
+    {
+      name: "大阪公立大COMUC",
+      backgroundColor: "#7e21a3",
+      id: 230,
+      result: [8, 5, 1],
+    },
+    {
+      name: "大阪大",
+      backgroundColor: "#0b1430",
+      id: 105,
+      result: [8, 5, 1],
+    },
+    {
+      name: "京大竜胆",
+      backgroundColor: "#00205b",
+      id: 72,
+      result: [5, 8, 1],
+    },
+    {
+      name: "京大支子",
+      backgroundColor: "#00205b",
+      id: 72,
+      result: [2, 9, 1],
+    },
+    {
+      name: "龍谷近畿",
+      backgroundColor: "#d60",
+      id: 303,
+      result: [3, 11, 0],
+    },
+    
+  ];
   const shines = [
     {
-      name: "早大臙脂",
-      backgroundColor: "#9B003F",
-      id: 162,
-      result: [7, 5, 0],
-      rank: 4,
-    },
-    {
-      name: "アルパコラ",
+      name: "一橋大",
       backgroundColor: "#DC143C",
       id: 58,
-      result: [1, 10, 1],
-    },
-    {
-      name: "横国みなと",
-      backgroundColor: "#1955A6",
-      id: 57,
-      result: [9, 2, 1],
+      result: [5, 0, 1],
     },
     {
       name: "横国みらい",
       backgroundColor: "#1955A6",
       id: 57,
-      result: [9, 3, 2],
+      result: [4, 4, 0],
     },
     {
-      name: "生田農工大",
+      name: "明治大",
       backgroundColor: "#483698",
       id: 61,
-      result: [7, 7, 0],
-      rank: 5,
+      result: [2, 4, 2],
     },
     {
-      name: "三田",
-      backgroundColor: "#001E62",
-      id: 106,
-      result: [9, 3, 2],
-    },
-    {
-      name: "Eintracht/上智",
+      name: "Eintracht/應龍",
       backgroundColor: "#ED591A",
       id: 202,
-      result: [4, 8, 0],
-      rank: 6,
+      result: [2, 4, 0],
     },
     {
-      name: "千葉/専修",
-      backgroundColor: "#C6002F",
-      id: 111,
-      result: [3, 11, 0],
-    },
-  ];
-  const winds = [
-    {
-      name: "早大紺碧",
-      backgroundColor: "#9B003F",
-      id: 162,
-      result: [11, 2, 1],
-    },
-    {
-      name: "横国ときわ",
-      backgroundColor: "#1955A6",
-      id: 57,
-      result: [10, 2, 0],
-    },
-    {
-      name: "城東",
-      backgroundColor: "#00007B",
-      id: 232,
-      result: [9, 5, 0],
-      rank: 3,
-    },
-    {
-      name: "短冊",
-      backgroundColor: "#DC143C",
-      id: 58,
-      result: [5, 7, 0],
-    },
-    {
-      name: "世田谷",
+      name: "世田谷砂嵐",
       backgroundColor: "#1D6D3F",
       id: 65,
-      result: [2, 10, 2],
-      rank: 8,
+      result: [5, 2, 1],
     },
     {
       name: "東京大",
       backgroundColor: "#ADD8E6",
       id: 155,
-      result: [2, 9, 3],
-      rank: 7,
+      result: [2, 4, 2],
     },
     {
       name: "目白",
       backgroundColor: "#79CAFF",
       id: 73,
-      result: [5, 7, 2],
+      result: [3, 5, 0],
+    },
+    
+  ];
+  const winds = [
+    {
+      name: "横国みなと",
+      backgroundColor: "#1955A6",
+      id: 57,
+      result: [4, 1, 2],
+    },
+    
+    {
+      name: "三田慶雲",
+      backgroundColor: "#001E62",
+      id: 106,
+      result: [4, 3, 1],
+    },
+    {
+      name: "早稲田大",
+      backgroundColor: "#9B003F",
+      id: 162,
+      result: [1, 4, 1],
+    },
+    {
+      name: "横国ときわ",
+      backgroundColor: "#1955A6",
+      id: 57,
+      result: [1, 5, 0],
+    },
+    {
+      name: "城東",
+      backgroundColor: "#00007B",
+      id: 232,
+      result: [6, 0, 0],
     },
     {
       name: "青山学院大",
       backgroundColor: "#277559",
       id: 239,
-      result: [6, 8, 0],
+      result: [1, 4, 0],
     },
   ];
 
-  const Teams: React.FC<{ title: string; teams: TeamType[] }> = ({
+  const Teams: React.FC<{ title: string; teams: TeamType[], gameNumber:number }> = ({
     teams,
     title,
+    gameNumber
   }) => {
     return (
       <>
@@ -216,7 +246,7 @@ function App() {
                         <>
                           残
                           {`${
-                            14 -
+                            gameNumber -
                             team.result[0] -
                             team.result[1] -
                             team.result[2]
@@ -225,7 +255,7 @@ function App() {
                       )}
                     </span>
                     <CircleIcon
-                      thumbnail_url={`https://cap-baseball.com/images/${team.id}.jpg`}
+                      thumbnail_url={`https://s3.ap-northeast-1.wasabisys.com/capbaseball/teamIcons/${team.id}.jpg`}
                       width={64}
                     />
                     <div
@@ -266,10 +296,13 @@ function App() {
       }}
     >
       <div>
-        <Teams title="Windリーグ" teams={winds} />
+        <Teams title="関東リーグ①" teams={winds} gameNumber={10}/>
       </div>
       <div>
-        <Teams title="Shineリーグ" teams={shines} />
+        <Teams title="関東リーグ②" teams={shines} gameNumber={12} />
+      </div>
+      <div>
+        <Teams title="関西リーグ" teams={wests} gameNumber={14} />
       </div>
       <style>
         {[0, 1, 2, 3, 4, 5, 6, 7].map((team, idx) => (
